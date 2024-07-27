@@ -251,6 +251,6 @@ Window:SelectTab(1)
 
 Fluent:Notify({
     Title = "Fluent",
-    Content = "The script has been loaded.",
+    Content = "Grand Hub has been loaded! Enjoy!",
     Duration = 8
 })
