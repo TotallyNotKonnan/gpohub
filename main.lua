@@ -165,7 +165,7 @@ do
     local Keybind = Tabs.Main:AddKeybind("Keybind", {
         Title = "KeyBind",
         Mode = "Toggle", -- Always, Toggle, Hold
-        Default = "LeftControl", -- String as the name of the keybind (MB1, MB2 for mouse buttons)
+        Default = "Insert", -- String as the name of the keybind (MB1, MB2 for mouse buttons)
 
         -- Occurs when the keybind is clicked, Value is `true`/`false`
         Callback = function(Value)
