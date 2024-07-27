@@ -20,16 +20,9 @@ local Tabs = {
 
 local Options = Fluent.Options
 
+local Flight = false
+
 do
-    Fluent:Notify({
-        Title = "Notification",
-        Content = "This is a notification",
-        SubContent = "SubContent", -- Optional
-        Duration = 5 -- Set to nil to make the notification not disappear
-    })
-
-
-
     Tabs.Main:AddParagraph({
         Title = "Paragraph",
         Content = "This is a paragraph.\nSecond line!"
@@ -180,28 +173,23 @@ do
 
     -- OnClick is only fired when you press the keybind and the mode is Toggle
     -- Otherwise, you will have to use Keybind:GetState()
-    Keybind:OnClick(function()
-        print("Keybind clicked:", Keybind:GetState())
-    end)
+    local KeybindFlight = Tabs.Main:AddKeybind("Keybind", {
+        Title = "Flight KeyBind",
+        Mode = "Toggle", -- Always, Toggle, Hold
+        Default = "V", -- String as the name of the keybind (MB1, MB2 for mouse buttons)
 
-    Keybind:OnChanged(function()
-        print("Keybind changed:", Keybind.Value)
-    end)
+        -- Occurs when the keybind is clicked, Value is `true`/`false`
+        Callback = function(Value)
+            Flight = not Flight
+            print("Flight status:", tostring(Flight)
+        end,
 
-    task.spawn(function()
-        while true do
-            wait(1)
-
-            -- example for checking if a keybind is being pressed
-            local state = Keybind:GetState()
-            if state then
-                print("Keybind is being held down")
-            end
-
-            if Fluent.Unloaded then break end
+        -- Occurs when the keybind itself is changed, `New` is a KeyCode Enum OR a UserInputType Enum
+        ChangedCallback = function(New)
+            print("Keybind changed!", New)
         end
-    end)
-
+    })
+    
     Keybind:SetValue("MB2", "Toggle") -- Sets keybind to MB2, mode to Hold
 
 
